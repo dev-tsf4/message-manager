@@ -6,12 +6,12 @@
 
 Test technique de recrutement.
 
-> Mettre en place un formulaire de contact sur le site.
-> Seul un utilisateur (adhérent) connecté pourra envoyer un message.
-> L'adhérent et l'admin pourront accéder à la page contact.
-> Réalisation d'un dashboard pour permettre à l'administrateur de traiter (marquer comme lu/non lu) les messages.
-> Trier les messages du plus récent au plus ancien.
-> Seul l'admin aura accès au dashboard.
+* Mettre en place un formulaire de contact sur le site.
+* Seul un utilisateur (adhérent) connecté pourra envoyer un message.
+* L'adhérent et l'admin pourront accéder à la page contact.
+* Réalisation d'un dashboard pour permettre à l'administrateur de traiter (marquer comme lu/non lu) les messages.
+* Trier les messages du plus récent au plus ancien.
+* Seul l'admin aura accès au dashboard.
 
 
 ## Requirements
