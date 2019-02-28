@@ -1,0 +1,94 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+    <!-- Content Column -->
+    <div class="col-lg-12 mb-6">
+        <!-- Illustrations -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h3 class="m-0 font-weight-bold text-primary">Liste des messages</h3>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Statut</th>
+                        <th scope="col"><i class="far fa-calendar-alt mr-1"></i>Reçu le</th>
+                        <th scope="col"><i class="fas fa-at mr-1"></i>Email du contact</th>
+                        <th scope="col"><i class="fas fa-comment-alt mr-1"></i>Sujet</th>
+                        <th scope="col"><i class="fas fa-cogs mr-1"></i>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for message in messages %}
+                        <tr>
+                            <td>
+                                {% if message.treated == false %}
+                                    <span class="badge badge-pill badge-warning">Non lu</span>
+                                {% else %}
+                                    <span class="badge badge-pill badge-success">Lu</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ message.createdAt |localizeddate('medium', 'short', null, 'UTC') }}</td>
+                            <td>{{ message.from.email }}</td>
+                            <td>{{ message.subject }}</td>
+                            <td>
+                                <ul class="list-inline actions-list">
+                                    <li class="list-inline-item">
+                                        <a href="#messageModal-{{ message.id }}" data-toggle="modal" class="btn btn-sm btn-info"><i class="fas fa-eye mr-1"></i>Visualiser</a></li>
+                                    <li class="list-inline-item">
+                                        <a href="{{ path('admin_message_edit', {id: message.id}) }}" class="btn btn-sm btn-dark"><i class="far fa-edit mr-1"></i>Editer</a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="messageModal-{{ message.id }}" tabindex="-1" role="dialog"
+                             aria-labelledby="messageModal-{{ message.id }}Label" aria-hidden="true">
+                            <div class="modal-dialog modal-notify modal-info" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-info text-white">
+                                        <h5 class="modal-title"
+                                            id="messageModal-{{ message.id }}Label">{{ message.subject }}</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p><b>De :</b> {{ message.from.email }} <b>Le :</b> {{ message.createdAt |localizeddate('medium', 'short', null, 'UTC') }}</p>
+                                        <p class="mt-3">{{ message.body | nl2br }}</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block modal %}
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

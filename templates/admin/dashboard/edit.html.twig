@@ -1,0 +1,29 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+    <!-- Content Column -->
+    <div class="col-lg-6 mb-6">
+        <!-- Illustrations -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h3 class="m-0 font-weight-bold text-primary">Message</h3>
+                <p><b>De :</b> {{ message.from.email }} <b>Le :</b> {{ message.createdAt |localizeddate('medium', 'short', null, 'UTC') }}</p>
+            </div>
+            <div class="card-body">
+                {{ include('flash_message/_flash_messages.html.twig') }}
+                {{ form_start(form) }}
+                <div class="form-label-group">
+                    {{ form_row(form.subject) }}
+                </div>
+                <div class="form-label-group">
+                    {{ form_row(form.body) }}
+                </div>
+                <div class="form-label-group">
+                    {{ form_row(form.treated) }}
+                </div>
+                <button class="btn btn-dark" type="submit">Sauvegarder</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
